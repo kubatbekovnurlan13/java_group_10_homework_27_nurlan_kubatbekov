@@ -1,11 +1,19 @@
 package edu1;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private String name;
     private int year;
     private String description;
     private Director director;
     private Cast[] casts;
+
+    @Override
+    public int compareTo(Movie o) {
+        if (this.getName().equals(o.getName())) {
+            return this.getDirector().compareTo(o.getDirector());
+        }
+        return this.getName().compareTo(o.getName());
+    }
 
     public Movie(
             String name,
@@ -21,6 +29,11 @@ public class Movie {
         this.casts = casts;
     }
 
+    @Override
+    public String toString() {
+        return "name: " + name + ", year: " + year + ", desc: " + description;
+    }
+
     public String getName() {
         return name;
     }
@@ -33,8 +46,8 @@ public class Movie {
         return description;
     }
 
-    public Director getDirector() {
-        return director;
+    public String getDirector() {
+        return director.getFullName();
     }
 
     public Cast[] getCasts() {

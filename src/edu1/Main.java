@@ -15,6 +15,11 @@ public class Main {
 //        sortByDirectorReverse();
 //        sortByNameReverse();
 //        sortByYearReverse();
+//        findByDirector("Peter Jackson");
+//        findByYear(2019);
+//        findByCast("Martin Freeman");
+//        findByCastAndRole("Martin Freeman");
+//        findAllCasts();
     }
 
     public static void showMovies() {
@@ -32,6 +37,99 @@ public class Main {
     public static void print(String name, String desc) {
         String format = "| %-45s => %-15s |\n";
         System.out.printf(format, name, desc);
+    }
+
+    public static void findByDirector(String directorName) {
+        try {
+            Map<String, Movie> movieMap = JsonSerializer.getMovies();
+            List<Movie> movies = new ArrayList<>();
+            System.out.println("Search by: " + directorName);
+
+            for (Map.Entry<String, Movie> m : movieMap.entrySet()) {
+                if (m.getValue().getDirector().equals(directorName)) {
+                    movies.add(m.getValue());
+                    System.out.println("Movie: " + m.getValue().getName());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void findByYear(int year) {
+        try {
+            Map<String, Movie> movieMap = JsonSerializer.getMovies();
+            List<Movie> movies = new ArrayList<>();
+            System.out.println("Search by: " + year);
+
+            for (Map.Entry<String, Movie> m : movieMap.entrySet()) {
+                if (m.getValue().getYear() == year) {
+                    movies.add(m.getValue());
+                    System.out.println("Movie: " + m.getValue().getName());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void findByCast(String name) {
+        try {
+            Map<String, Movie> movieMap = JsonSerializer.getMovies();
+            List<Movie> movies = new ArrayList<>();
+            System.out.println("Search by: " + name);
+
+            for (Map.Entry<String, Movie> m : movieMap.entrySet()) {
+                for (int i = 0; i < m.getValue().getCasts().length; i++) {
+                    if (m.getValue().getCasts()[i].getFullName().equals(name)) {
+                        movies.add(m.getValue());
+                        System.out.println("Movie: " + m.getValue().getName() + ", cast: " + m.getValue().getCasts()[i].getFullName());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void findByCastAndRole(String name) {
+        try {
+            Map<String, Movie> movieMap = JsonSerializer.getMovies();
+            List<Movie> movies = new ArrayList<>();
+            System.out.println("Search by: " + name);
+
+            for (Map.Entry<String, Movie> m : movieMap.entrySet()) {
+                for (int i = 0; i < m.getValue().getCasts().length; i++) {
+                    if (m.getValue().getCasts()[i].getFullName().equals(name)) {
+                        movies.add(m.getValue());
+                        System.out.println("Movie: " + m.getValue().getName() + ", cast: " + m.getValue().getCasts()[i].getFullName());
+                        System.out.println("Role: " + m.getValue().getCasts()[i].getRole());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void findAllCasts() {
+        try {
+            Map<String, Movie> movieMap = JsonSerializer.getMovies();
+            List<Movie> movies = new ArrayList<>();
+
+            for (Map.Entry<String, Movie> m : movieMap.entrySet()) {
+                System.out.println("Movie: " + m.getValue().getName());
+                for (int i = 0; i < m.getValue().getCasts().length; i++) {
+                    movies.add(m.getValue());
+                    System.out.println("Cast: " + m.getValue().getCasts()[i].getFullName());
+                    System.out.println("Role: " + m.getValue().getCasts()[i].getRole());
+                }
+                System.out.println("----------------------------");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void getMovieByKey(String name) {

@@ -5,7 +5,7 @@ public class Movie implements Comparable<Movie> {
     private int year;
     private String description;
     private Director director;
-    private Cast[] casts;
+    private Cast[] cast;
 
     @Override
     public int compareTo(Movie o) {
@@ -26,12 +26,13 @@ public class Movie implements Comparable<Movie> {
         this.year = year;
         this.description = description;
         this.director = director;
-        this.casts = casts;
+        this.cast = casts;
     }
 
     @Override
     public String toString() {
-        return "name: " + name + ", year: " + year + ", desc: " + description;
+        return "name: " + name + ", year: " + year + ", desc: " + description
+                +", casts: " + cast;
     }
 
     public String getName() {
@@ -51,6 +52,6 @@ public class Movie implements Comparable<Movie> {
     }
 
     public Cast[] getCasts() {
-        return casts;
+        return cast;
     }
 }

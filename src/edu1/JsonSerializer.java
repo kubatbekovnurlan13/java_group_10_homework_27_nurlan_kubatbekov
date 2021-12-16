@@ -20,6 +20,7 @@ public class JsonSerializer {
             Map<String, Movie> movieMap = new HashMap<>();
             for (int i = 0; i < movies.size(); i++) {
                 movieMap.put(movies.get(i).getName(), movies.get(i));
+//                System.out.println(movies.get(i).getCasts());
             }
             return movieMap;
         }

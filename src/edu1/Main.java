@@ -11,12 +11,18 @@ public class Main {
     public static void showMovies() {
         try {
             Map<String, Movie> movieMap = JsonSerializer.getMovies();
+            print("Name:","Description:");
             for (Map.Entry<String, Movie> m : movieMap.entrySet()) {
-                System.out.println(m.getKey() + " : " + m.getValue().getDescription());
+                print(m.getKey(),m.getValue().getDescription());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void print(String name, String desc) {
+        String format = "| %-45s => %-15s |\n";
+        System.out.printf(format, name, desc);
     }
 
 
